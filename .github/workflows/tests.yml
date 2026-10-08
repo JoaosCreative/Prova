@@ -1,16 +1,19 @@
-name: Testes de Login
+name: Testes Selenium
+
 on: [push, pull_request]
+
 jobs:
-  test:
+  testes:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Configurar Node.js
-        uses: actions/setup-node@v4
+      - name: Configurar Java
+        uses: actions/setup-java@v4
         with:
-          node-version: "20"
-          cache: npm
-      - name: Instalar dependências
-        run: npm ci
-      - name: Executar testes
-        run: npm test
+          distribution: temurin
+          java-version: "17"
+          cache: maven
+      - name: Configurar Chrome
+        uses: browser-actions/setup-chrome@v1
+      - name: Executar todas as questões
+        run: mvn --batch-mode test

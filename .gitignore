@@ -1,5 +1,5 @@
-node_modules/
-cypress/screenshots/
-cypress/videos/
-tests/__pycache__/
-.pytest_cache/
+target/
+.idea/
+.vscode/
+*.iml
+.DS_Store
