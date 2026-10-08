@@ -5,13 +5,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Configurar Python
-        uses: actions/setup-python@v5
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
         with:
-          python-version: "3.10"
-      - name: Instalar dependencias
-        run: |
-          pip install -r requirements.txt
-          playwright install --with-deps chromium
-      - name: Rodar testes
-        run: pytest
+          node-version: "20"
+          cache: npm
+      - name: Instalar dependências
+        run: npm ci
+      - name: Executar testes
+        run: npm test
