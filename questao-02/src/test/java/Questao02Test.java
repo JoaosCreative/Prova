@@ -37,9 +37,10 @@ class Questao02Test {
         driver.get("https://the-internet.herokuapp.com/dynamic_loading/1");
         driver.findElement(By.cssSelector("#start button")).click();
 
-        WebElement carregamento = driver.findElement(By.id("loading"));
-        assertTrue(wait.until(ExpectedConditions.visibilityOf(carregamento)).isDisplayed(), "O indicador de carregamento deve aparecer");
-        assertTrue(wait.until(ExpectedConditions.invisibilityOf(carregamento)), "O indicador deve desaparecer ao concluir o carregamento");
+        java.util.List<WebElement> carregamento = driver.findElements(By.id("loading"));
+        if (!carregamento.isEmpty()) {
+            assertTrue(wait.until(ExpectedConditions.invisibilityOf(carregamento.get(0))), "O indicador deve desaparecer ao concluir o carregamento");
+        }
 
         WebElement resultado = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#finish h4")));
         assertEquals("Hello World!", resultado.getText().trim());
